@@ -1,0 +1,35 @@
+#include <bits/stdc++.h>
+using namespace std;
+
+bool isValid(string s) {
+    int count = 0;
+    for (int i = 0; i < s.length() - 1; i++) {
+        if (s[i] == '0' && s[i + 1] == '1') {
+            count++;
+        }
+    }
+    return count == 2;
+}
+
+void generateBinaryStrings(string prefix, int n) {
+    if (n == 0) {
+        if (isValid(prefix)) {
+            cout << prefix << " ";
+        }
+    } else {
+        generateBinaryStrings(prefix + "0", n - 1);
+        generateBinaryStrings(prefix + "1", n - 1);
+    }
+}
+
+int main() {
+    int t;
+    cin >> t;
+    while (t--) {
+        int n;
+        cin >> n;
+        generateBinaryStrings("", n);
+        cout << endl;
+    }
+    return 0;
+}
