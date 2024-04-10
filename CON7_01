@@ -1,0 +1,32 @@
+//7/10
+#include <bits/stdc++.h>
+using namespace std;
+
+int main() {
+    stack<int> st; // Khởi tạo ngăn xếp
+    string command;
+    while (cin >> command) {
+        if (command == "push") {
+            int val;
+            cin >> val;
+            st.push(val); // Thêm giá trị vào ngăn xếp
+        } else if (command == "pop") {
+            if (!st.empty())
+                st.pop(); // Xóa phần tử trên đỉnh ngăn xếp nếu có
+        } else if (command == "show") {
+            if (st.empty()) {
+                cout << "empty" << endl; // In ra "empty" nếu ngăn xếp rỗng
+            } else {
+                // In ra các phần tử trong ngăn xếp từ đỉnh đến đáy
+                stack<int> tempSt = st;
+                while (!tempSt.empty()) {
+                    cout << tempSt.top() << " ";
+                    tempSt.pop();
+                }
+                cout << endl;
+            }
+        }
+    }
+
+    return 0;
+}
