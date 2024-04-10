@@ -1,0 +1,51 @@
+#include <bits/stdc++.h>
+using namespace std;
+
+int evaluatePrefix(string prefix) {
+    stack<int> st;
+    int length = prefix.length();
+
+    for (int i = length - 1; i >= 0; i--) {
+        if (isdigit(prefix[i])) {
+            st.push(prefix[i] - '0');
+        } else {
+            int operand1 = st.top();
+            st.pop();
+            int operand2 = st.top();
+            st.pop();
+
+            switch (prefix[i]) {
+                case '+':
+                    st.push(operand1 + operand2);
+                    break;
+                case '-':
+                    st.push(operand1 - operand2);
+                    break;
+                case '*':
+                    st.push(operand1 * operand2);
+                    break;
+                case '/':
+                    st.push(operand1 / operand2);
+                    break;
+            }
+        }
+    }
+
+    return st.top();
+}
+
+int main() {
+    int T;
+    cin >> T;
+    cin.ignore(); // Đọc kí tự xuống dòng sau số lượng bộ test
+
+    while (T--) {
+        string prefix;
+        getline(cin, prefix); // Đọc biểu thức tiền tố
+
+        int result = evaluatePrefix(prefix);
+        cout << result << endl;
+    }
+
+    return 0;
+}
