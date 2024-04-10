@@ -1,0 +1,51 @@
+//7/10
+#include <iostream>
+#include <vector>
+using namespace std;
+
+const int MOD = 1e9 + 7;
+
+// Tính giai thừa modulo MOD
+int factorial(int n) {
+    int result = 1;
+    for (int i = 1; i <= n; i++) {
+        result = (1LL * result * i) % MOD;
+    }
+    return result;
+}
+
+// Tính modular inverse
+int modInverse(int a) {
+    int b = MOD - 2;
+    int result = 1;
+    while (b > 0) {
+        if (b % 2 == 1) {
+            result = (1LL * result * a) % MOD;
+        }
+        a = (1LL * a * a) % MOD;
+        b /= 2;
+    }
+    return result;
+}
+
+// Tính C(n, k) modulo MOD
+int binomialCoefficient(int n, int k) {
+    if (k == 0 || k == n) {
+        return 1;
+    }
+    int numerator = factorial(n);
+    int denominator = (1LL * factorial(k) * factorial(n - k)) % MOD;
+    return (1LL * numerator * modInverse(denominator)) % MOD;
+}
+
+int main() {
+    int T;
+    cin >> T;
+    while (T--) {
+        int n, k;
+        cin >> n >> k;
+        int result = binomialCoefficient(n, k);
+        cout << result << endl;
+    }
+    return 0;
+}
