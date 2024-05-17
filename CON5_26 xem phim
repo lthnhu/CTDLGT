@@ -1,0 +1,40 @@
+#include <bits/stdc++.h>
+using namespace std;
+
+int maxWeightForMovie(int C, int N, vector<int>& weights) {
+    sort(weights.begin(), weights.end());
+    
+    int totalWeight = 0;
+    int count = 0;
+    
+    for (int i = 0; i < N; i++) {
+        if (totalWeight + weights[i] <= C) {
+            totalWeight += weights[i];
+            count++;
+        } else {
+            break;
+        }
+    }
+    
+    return totalWeight;
+}
+
+int main() {
+    int T;
+    cin >> T;
+
+    while (T--) {
+        int C, N;
+        cin >> C >> N;
+
+        vector<int> weights(N);
+        for (int i = 0; i < N; i++) {
+            cin >> weights[i];
+        }
+
+        int result = maxWeightForMovie(C, N, weights);
+        cout << result << endl;
+    }
+
+    return 0;
+}
